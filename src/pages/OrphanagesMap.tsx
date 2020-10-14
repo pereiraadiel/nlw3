@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/pages/orphanages-map.css";
 import 'leaflet/dist/leaflet.css';
-
+import api from '../services/api';
 import { Link } from 'react-router-dom';
-import { FiPlus, FiSun } from 'react-icons/fi';
-import { Map, TileLayer } from 'react-leaflet';
+
+import { FiPlus, FiSun, FiArrowRight } from 'react-icons/fi';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import mapMarkerImg from '../images/map-marker.svg';
+import mapIcon from '../utils/mapIcon';
+
+interface Orphanage  {
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+}
 
 function OrphanagesMap() {
+  const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+  
+  useEffect(()=> {
+    api.get("orphanages").then(response => {
+      // console.log(response.data);
+      setOrphanages(response.data);
+    });
+  },[]);
+
   const [mapTheme, setMapTheme] = useState("navigation-preview-night-v4");
 
   function changeTheme() {
@@ -39,8 +57,37 @@ function OrphanagesMap() {
       >
         {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"/> */}
         <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/${mapTheme}/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} />
+        {/* 
+        <Marker
+          icon={mapIcon} 
+          position={[-18.9137502, -48.2775493]}
+        >
+          <Popup closeButton={false} minWidth={240} maxWidth={240} className="map-popup">
+            Kids Fun Orphanage
+            <Link to="/orphanages/1">
+              <FiArrowRight size={20} color="#fff"/>
+            </Link>
+          </Popup>
+        </Marker>
+        */}
+        {orphanages.map(orphanage => {
+          return (
+            <Marker 
+              key={orphanage.id}
+              icon={mapIcon} 
+              position={[orphanage.latitude , orphanage.longitude]}
+            >
+              <Popup closeButton={false} minWidth={240} maxWidth={240} className="map-popup">
+                {orphanage.name}
+                <Link to={`/orphanages/${orphanage.id}`}>
+                  <FiArrowRight size={20} color="#fff"/>
+                </Link>
+              </Popup>
+            </Marker>
+          );
+        })}
       </Map>
-      <Link to="" className="create-orphanage">
+      <Link to="/orphanages/create" className="create-orphanage">
         <FiPlus size={32} color="#fff" />
       </Link>
       <Link to="#" className="change-theme" onClick={changeTheme}>

@@ -34,9 +34,13 @@ Este projeto foi construído durante a terceira edição do evento Next Level We
 <p align="center">
   <img alt="Happy Web" title="Happy Web Landing" src="./.github/landing.png" width="1000px">
 
-  <img alt="Happy Web" title="Happy Web Map" src="./.github/orph-map.png" width="1000px">
+  <img alt="Happy Web" title="Happy Web Map" src="./.github/orph-map2.png" width="1000px">
 
-  <img alt="Happy Web" title="Happy Web Dark Map" src="./.github/orph-dark-map.png" width="1000px">
+  <img alt="Happy Web" title="Happy Web Dark Map" src="./.github/orph-dark-map2.png" width="1000px">
+  
+  <img alt="Happy Web" title="Happy Web Orphanage Create" src="./.github/orph-create.png" width="1000px">
+
+  <img alt="Happy Web" title="Happy Web Orphanage Details" src="./.github/orph-details.png" width="1000px">
 </p>
 
 ---
@@ -110,7 +114,44 @@ do arquivo OrphanagesMap.tsx em src/pages.
 </br>
 ### 🌐 Rodando o Servidor
 
-> Em breve...
+### ♊ Clonando o Repositório do servidor
+
+```bash
+
+$ git clone https://github.com/pereiraadiel/nlw3-backend
+
+# entre na pasta do projeto
+
+$ cd nlw3-backend
+
+```
+### 💻 Rodando o Happy web
+
+
+Instale as dependências
+
+```bash
+
+$ yarn
+
+# ou, caso use npm
+
+$ npm install
+
+```
+
+Rode a aplicação
+
+```bash
+
+$ yarn dev
+
+# ou, caso use npm
+
+$ npm run dev
+
+```
+
 
 ### 📱 Rodando a Aplicação Mobile 
 
@@ -128,12 +169,14 @@ Se tudo deu certo, o app estará executando em [Localhost](http://localhost:3000
 As ferramentas usadas no desenvolvimento do projeto.
 
 #### Backend:
-> Em breve...
+- Typescript
+- Node.Js 
+- Express
+- TypeORM
 
 #### Web
 - Typescript
 - ReactJS ⚛️
-- React Router Dom
 - React Icons
 - Leaflet 🍃
 - API do Mapbox 🗺️
