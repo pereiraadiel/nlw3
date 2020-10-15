@@ -3,6 +3,69 @@
   min-height: 100vh;
 }
 
+#page-orphanage .change-theme {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+
+  z-index: 10;
+
+  width: 64px;
+  height: 64px;
+  background: #05d;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.2s;
+}
+
+.dark-theme-main {
+  background: #424D5C;
+}
+
+.light-theme-main {
+  background: #EBF3F5;
+}
+
+.form-light-theme .orphanage-details-content h1,
+.form-light-theme .orphanage-details-content h2 {
+  color: #4D6F80; 
+}
+
+.form-light-theme .orphanage-details-content p{
+  color: #5C8599;
+}
+
+.form-light-theme .orphanage-details-content .map-container {
+  background: #E6F7FB;
+  border: 1px solid #B3DAE2;
+}
+
+.form-light-theme .orphanage-details-content .map-container footer a {
+  color: #0089A5;
+}
+.form-dark-theme .orphanage-details-content .map-container footer a {
+  color: #09F9A5;
+}
+
+.form-dark-theme .orphanage-details-content h1,
+.form-dark-theme .orphanage-details-content h2{
+  color: #FFF;
+}
+
+.form-dark-theme .orphanage-details-content p{
+  color: #AAA;
+}
+
+.form-dark-theme .orphanage-details-content .map-container {
+  background: #626D7C;
+  border: 1px solid #626D7C;
+}
+
+
 #page-orphanage main {
   flex: 1;
 }
@@ -11,8 +74,8 @@
   width: 700px;
   margin: 64px auto;
 
-  background: #FFFFFF;
-  border: 1px solid #D3E2E5;
+  /* background: #FFFFFF;
+  border: 1px solid #D3E2E5; */
   border-radius: 20px;
 
   overflow: hidden;
@@ -60,7 +123,6 @@
 }
 
 .orphanage-details .orphanage-details-content h1 {
-  color: #4D6F80;
   font-size: 54px;
   line-height: 54px;
   margin-bottom: 8px;
@@ -68,14 +130,11 @@
 
 .orphanage-details .orphanage-details-content p {
   line-height: 28px;
-  color: #5C8599;
   margin-top: 24px;
 }
 
 .orphanage-details .orphanage-details-content .map-container {
   margin-top: 64px;
-  background: #E6F7FB;
-  border: 1px solid #B3DAE2;
   border-radius: 20px;
 }
 
@@ -86,7 +145,6 @@
 
 .orphanage-details .orphanage-details-content .map-container footer a {
   line-height: 24px;
-  color: #0089A5;
   text-decoration: none;
 }
 
@@ -106,7 +164,6 @@
 .orphanage-details .orphanage-details-content h2 {
   font-size: 36px;
   line-height: 46px;
-  color: #4D6F80;
 }
 
 .orphanage-details .orphanage-details-content .open-details {

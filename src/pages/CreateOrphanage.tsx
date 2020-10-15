@@ -1,21 +1,50 @@
-import React ,{ ChangeEvent, FormEvent, useState }  from "react";
+import React ,{ ChangeEvent, FormEvent, useState, useEffect }  from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiSun } from "react-icons/fi";
 
+import '../styles/animations.css';
 import '../styles/pages/create-orphanage.css';
 import Sidebar from "../components/Sidebar";
 
 import mapIcon from '../utils/mapIcon';
 import api from "../services/api";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function CreateOrphanage() {
 
   const history = useHistory();
 
   const [position, setPosition] = useState({latitude:0, longitude:0});
+
+  const [theme, setTheme] = useState(true);
+  const [mapTheme, setMapTheme] = useState("navigation-preview-day-v4");
+  useEffect(()=>{
+    let main = document.getElementById('page-create-orphanage');
+    let form = document.getElementById('form-create-orphanage');
+    if(!main || !form) return;
+
+    if(theme){
+      main.classList.add("light-theme-main");
+      form.classList.add("form-light-theme");
+      main.classList.remove("dark-theme-main");
+      form.classList.remove("form-dark-theme");
+      setMapTheme("navigation-preview-day-v4");
+      // setTheme(false);
+    }else{
+      main.classList.remove("light-theme-main");
+      form.classList.remove("form-light-theme");
+      main.classList.add("dark-theme-main");
+      form.classList.add("form-dark-theme");
+      setMapTheme("navigation-preview-night-v4");
+      // setTheme(true);
+    }
+  },[theme]);
+
+  function changeTheme() {
+    setTheme(!theme);
+  }
 
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
@@ -79,8 +108,8 @@ export default function CreateOrphanage() {
   return (
     <div id="page-create-orphanage">
       <Sidebar/>
-      <main>
-        <form onSubmit={handleSubmit} className="create-orphanage-form">
+      <main className="animate-right">
+        <form id="form-create-orphanage" onSubmit={handleSubmit} className="create-orphanage-form">
           <fieldset>
             <legend>Dados</legend>
 
@@ -91,7 +120,7 @@ export default function CreateOrphanage() {
               onclick={handleMapClick}
             >
               <TileLayer 
-                url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                url={`https://api.mapbox.com/styles/v1/mapbox/${mapTheme}/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
               />
 
               {position.latitude !== 0 && position.longitude !== 0 && (
@@ -192,6 +221,9 @@ export default function CreateOrphanage() {
             Confirmar
           </button>
         </form>
+        <Link to="#" className="change-theme" onClick={changeTheme}>
+          <FiSun size={32} color="#fff" />
+        </Link>
       </main>
     </div>
   );

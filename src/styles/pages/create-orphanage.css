@@ -2,6 +2,101 @@
   display: flex;
 }
 
+#page-create-orphanage .change-theme {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+
+  z-index: 10;
+
+  width: 64px;
+  height: 64px;
+  background: #05d;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.2s;
+} 
+
+.dark-theme-main {
+  background: #424D5C;
+}
+
+.light-theme-main {
+  background: #EBF3F5;
+}
+
+.form-dark-theme {
+  background: #525D6C;
+  border: 1px solid #525D6C;
+  color: #FFF;
+}
+
+.form-light-theme {
+  background: #FFF;
+  border: 1px solid #D3E2E5;
+  color: #5C8599;
+}
+
+.form-light-theme .input-block input,
+.form-light-theme .input-block textarea{
+  background: #F5F8FA;
+  border: 1px solid #D3E2E5;
+  color: #5C8599;
+}
+
+.form-dark-theme .input-block input,
+.form-dark-theme .input-block textarea{
+  background: #626D7C;
+  border: 1px solid #626D7C;
+  color: #FFF;
+}
+
+.form-light-theme .input-block .input-block label,
+.form-light-theme .input-block .input-block label span {
+  color: #8FA7B3;
+}
+
+.form-dark-theme .input-block .input-block label,
+.form-dark-theme .input-block .input-block label span {
+  color: #FFF;
+}
+
+.form-light-theme .input-block .button-select button{
+  background: #F5F8FA;
+  border: 1px solid #D3E2E5;
+  color: #5C8599;
+}
+
+.form-light-theme .input-block .button-select button.active {
+  background: #EDFFF6;
+  border: 3.2px solid #A1E9C5;
+  color: #37C77F;
+}
+
+.form-dark-theme .input-block .button-select button{
+  background: #626D7C;
+  border: 1px solid #626D7C;
+  color: #FFF;
+}
+
+.form-dark-theme .input-block .button-select button.active {
+  background: #626D7C;
+  border: 3.2px solid #33A77A;
+  color: #37C77F;
+}
+
+.form-light-theme button.confirm-button {
+  color: #fff;
+}
+
+.form-dark-theme button.confirm-button {
+  color: #333;
+}
+
 #page-create-orphanage main {
   flex: 1;
 }
@@ -9,13 +104,8 @@
 form.create-orphanage-form {
   width: 700px;
   margin: 64px auto;
-
-  background: #FFFFFF;
-  border: 1px solid #D3E2E5;
   border-radius: 20px;
-
   padding: 64px 80px;
-
   overflow: hidden;
 }
 
@@ -38,7 +128,6 @@ form.create-orphanage-form fieldset legend {
 
   font-size: 32px;
   line-height: 34px;
-  color: #5C8599;
   font-weight: 700;
 
   border-bottom: 1px solid #D3E2E5;
@@ -52,14 +141,12 @@ form.create-orphanage-form .input-block + .input-block {
 
 form.create-orphanage-form .input-block label {
   display: flex;
-  color: #8FA7B3;
   margin-bottom: 8px;
   line-height: 24px;
 }
 
 form.create-orphanage-form .input-block label span {
   font-size: 14px;
-  color: #8FA7B3;
   margin-left: 24px;
   line-height: 24px;
 }
@@ -67,11 +154,8 @@ form.create-orphanage-form .input-block label span {
 form.create-orphanage-form .input-block input,
 form.create-orphanage-form .input-block textarea {
   width: 100%;
-  background: #F5F8FA;
-  border: 1px solid #D3E2E5;
   border-radius: 20px;
   outline: none;
-  color: #5C8599;
 }
 
 form.create-orphanage-form .input-block input {
@@ -123,16 +207,7 @@ form.create-orphanage-form .input-block .button-select {
 
 form.create-orphanage-form .input-block .button-select button {
   height: 64px;
-  background: #F5F8FA;
-  border: 1px solid #D3E2E5;
-  color: #5C8599;
   cursor: pointer;
-}
-
-form.create-orphanage-form .input-block .button-select button.active {
-  background: #EDFFF6;
-  border: 3.2px solid #A1E9C5;
-  color: #37C77F;
 }
 
 form.create-orphanage-form .input-block .button-select button:first-child {
@@ -153,7 +228,6 @@ form.create-orphanage-form button.confirm-button {
   cursor: pointer;
   background: #3CDC8C;
   border-radius: 20px;
-  color: #FFFFFF;
   font-weight: 800;
 
   display: flex;

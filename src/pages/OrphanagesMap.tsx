@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/pages/orphanages-map.css";
+import "../styles/animations.css";
 import 'leaflet/dist/leaflet.css';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
@@ -38,7 +39,7 @@ function OrphanagesMap() {
 
   return (
     <div id="page-map">
-      <aside>
+      <aside className="animate-right">
         <header>
           <img src={mapMarkerImg} alt="Happy Logo" />
           <h2>Escolha um Orfanato no mapa</h2>
@@ -57,19 +58,7 @@ function OrphanagesMap() {
       >
         {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"/> */}
         <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/${mapTheme}/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} />
-        {/* 
-        <Marker
-          icon={mapIcon} 
-          position={[-18.9137502, -48.2775493]}
-        >
-          <Popup closeButton={false} minWidth={240} maxWidth={240} className="map-popup">
-            Kids Fun Orphanage
-            <Link to="/orphanages/1">
-              <FiArrowRight size={20} color="#fff"/>
-            </Link>
-          </Popup>
-        </Marker>
-        */}
+        
         {orphanages.map(orphanage => {
           return (
             <Marker 
