@@ -35,7 +35,7 @@ export default function Orphanage() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [orphanage, setOrphanage] = useState<Orphanage>();
 
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState(false);
   const [mapTheme, setMapTheme] = useState("navigation-preview-day-v4");
   useEffect(()=>{
     let main = document.getElementById('page-orphanage');
