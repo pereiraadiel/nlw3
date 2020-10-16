@@ -18,8 +18,8 @@ interface Orphanage {
   latitude: number,
   longitude: number,
   about: string,
-  instructions : string,
-  opening_hours : string,
+  instructions: string,
+  opening_hours: string,
   open_on_weekends: string,
   images: Array<{
     id: number,
@@ -35,12 +35,12 @@ export default function OrphanageDetails() {
 
   useEffect(() => {
     api.get(`orphanages/${params.id}`)
-      .then( response => {
+      .then(response => {
         setOrphanage(response.data);
-    });
+      });
   }, [params.id]);
 
-  if(!orphanage){
+  if (!orphanage) {
     return (
       <View style={styles.container}>
         <Text style={styles.description}>Carregando...</Text>
@@ -60,27 +60,27 @@ export default function OrphanageDetails() {
 
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{orphanage.name}</Text>
-        <Text style={styles.description}>Presta assistência a crianças de 06 a 15 anos que se encontre em situação de risco e/ou vulnerabilidade social.</Text>
-      
+        <Text style={styles.description}>{orphanage.about}</Text>
+
         <View style={styles.mapContainer}>
-          <MapView 
+          <MapView
             initialRegion={{
-              latitude: -27.2092052,
-              longitude: -49.6401092,
+              latitude: orphanage.latitude,
+              longitude: orphanage.longitude,
               latitudeDelta: 0.008,
               longitudeDelta: 0.008,
-            }} 
+            }}
             zoomEnabled={false}
             pitchEnabled={false}
             scrollEnabled={false}
             rotateEnabled={false}
             style={styles.mapStyle}
           >
-            <Marker 
+            <Marker
               icon={mapMarkerImg}
-              coordinate={{ 
-                latitude: -27.2092052,
-                longitude: -49.6401092
+              coordinate={{
+                latitude: orphanage.latitude,
+                longitude: orphanage.longitude
               }}
             />
           </MapView>
@@ -89,24 +89,33 @@ export default function OrphanageDetails() {
             <Text style={styles.routesText}>Ver rotas no Google Maps</Text>
           </View>
         </View>
-      
+
         <View style={styles.separator} />
 
         <Text style={styles.title}>Instruções para visita</Text>
-        <Text style={styles.description}>Venha como se sentir a vontade e traga muito amor e paciência para dar.</Text>
+        <Text style={styles.description}>{orphanage.instructions}</Text>
 
         <View style={styles.scheduleContainer}>
           <View style={[styles.scheduleItem, styles.scheduleItemBlue]}>
             <Feather name="clock" size={40} color="#2AB5D1" />
-            <Text style={[styles.scheduleText, styles.scheduleTextBlue]}>Segunda à Sexta 8h às 18h</Text>
+            <Text style={[styles.scheduleText, styles.scheduleTextBlue]}>Segunda à Sexta {orphanage.opening_hours} </Text>
           </View>
-          <View style={[styles.scheduleItem, styles.scheduleItemGreen]}>
-            <Feather name="info" size={40} color="#39CC83" />
-            <Text style={[styles.scheduleText, styles.scheduleTextGreen]}>Atendemos fim de semana</Text>
-          </View>
+          {
+            orphanage.open_on_weekends ? (
+              <View style={[styles.scheduleItem, styles.scheduleItemGreen]}>
+                <Feather name="info" size={40} color="#39CC83" />
+                <Text style={[styles.scheduleText, styles.scheduleTextGreen]}>Atendemos fim de semana</Text>
+              </View>
+            ) : (
+                <View style={[styles.scheduleItem, styles.scheduleItemRed]}>
+                  <Feather name="info" size={40} color="#F12935" />
+                  <Text style={[styles.scheduleText, styles.scheduleTextRed]}>Não Atendemos fim de semana</Text>
+                </View>
+              )
+          }
         </View>
 
-        <RectButton style={styles.contactButton} onPress={() => {}}>
+        <RectButton style={styles.contactButton} onPress={() => { }}>
           <FontAwesome name="whatsapp" size={24} color="#FFF" />
           <Text style={styles.contactButtonText}>Entrar em contato</Text>
         </RectButton>
@@ -204,6 +213,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 
+  scheduleItemRed: {
+    backgroundColor: '#F191c5',
+    borderWidth: 1,
+    borderColor: '#F12935',
+    borderRadius: 20,
+  },
+
   scheduleText: {
     fontFamily: 'Nunito_600SemiBold',
     fontSize: 16,
@@ -217,6 +233,10 @@ const styles = StyleSheet.create({
 
   scheduleTextGreen: {
     color: '#37C77F'
+  },
+
+  scheduleTextRed: {
+    color: '#F7477F'
   },
 
   contactButton: {
