@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Image, View, ScrollView, Text, StyleSheet, Dimensions } from 'react-native';
+import { Image, View, ScrollView, Text, StyleSheet, Dimensions, Linking } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 
 import mapMarkerImg from '../images/map-marker.png';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 import api from '../services/api';
 
 interface OrphanageDetailsRouteParams {
@@ -48,13 +48,25 @@ export default function OrphanageDetails() {
     )
   }
 
+  function handleOpenGoogleMapsRoute () {
+    {/* https://www.google.com/maps/dir/?api=1&destination=-18.91122947937593,-48.2969069480896 */}
+    Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${orphanage?.latitude},${orphanage?.longitude}`);
+    
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imagesContainer}>
         <ScrollView horizontal pagingEnabled>
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
-          <Image style={styles.image} source={{ uri: 'https://fmnova.com.br/images/noticias/safe_image.jpg' }} />
+          { orphanage.images.map( image => {
+            <Image 
+              key={image.id}
+              style={styles.image} 
+              source={{ 
+                uri: image.url 
+              }} 
+            />
+          }) }
         </ScrollView>
       </View>
 
@@ -85,9 +97,9 @@ export default function OrphanageDetails() {
             />
           </MapView>
 
-          <View style={styles.routesContainer}>
+         <TouchableOpacity style={styles.routesContainer} onPress={handleOpenGoogleMapsRoute}>
             <Text style={styles.routesText}>Ver rotas no Google Maps</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.separator} />
@@ -108,7 +120,7 @@ export default function OrphanageDetails() {
               </View>
             ) : (
                 <View style={[styles.scheduleItem, styles.scheduleItemRed]}>
-                  <Feather name="info" size={40} color="#F12935" />
+                  <Feather name="info" size={40} color="#FF669D" />
                   <Text style={[styles.scheduleText, styles.scheduleTextRed]}>Não Atendemos fim de semana</Text>
                 </View>
               )
@@ -214,9 +226,9 @@ const styles = StyleSheet.create({
   },
 
   scheduleItemRed: {
-    backgroundColor: '#F191c5',
+    backgroundColor: '#FEF6F9',
     borderWidth: 1,
-    borderColor: '#F12935',
+    borderColor: '#FFB6D4',
     borderRadius: 20,
   },
 
