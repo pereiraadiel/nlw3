@@ -182,7 +182,9 @@ As ferramentas usadas no desenvolvimento do projeto.
 - API do Mapbox 🗺️
 
 #### Mobile:
-> Em breve...
+
+- Typescript
+- React Native
 
 ---
 
